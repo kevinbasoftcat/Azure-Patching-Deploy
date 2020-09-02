@@ -2,7 +2,14 @@
     "$schema": "https://schema.management.azure.com/schemas/2019-04-01/deploymentTemplate.json#",
     "contentVersion": "1.0.0.0",
     "parameters": {
-    "containerSasToken": { "type": "securestring" }
+    "containerSasToken": { "type": "securestring" },
+    "softcatDynamicsCode": {
+      "type": "string",
+      "maxLength": 6,
+      "metadata": {
+        "description": "Softcat customer dynamics code. Must be a valid 6 character code."
+      }
+    }
     },
     "variables":{
     "templateBaseUrl": "https://sctdeploymenttemplates.blob.core.windows.net/live/"
