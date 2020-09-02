@@ -5,7 +5,7 @@
     "containerSasToken": { "type": "securestring" }
     },
     "variables":{
-    "templateBaseUrl": "https://sctdeploymenttemplates.blob.core.windows.net/live/"
+    "templateBaseUrl": "https://sctdeploymenttemplates.blob.core.windows.net/live/",
     },
     "resources": [
     {
@@ -15,7 +15,7 @@
       "properties": {
       "mode": "Incremental",
       "templateLink": {
-        "uri": "[uri(variables('templateBaseUrl'), 'Azure-Patching-Template.json', parameters('containerSasToken')]",
+        "uri": "[uri(variables('templateBaseUrl'), 'Azure-Patching-Template.json', parameters('containerSasToken'))]",
         "contentVersion": "1.0.0.0"
       }
       }
