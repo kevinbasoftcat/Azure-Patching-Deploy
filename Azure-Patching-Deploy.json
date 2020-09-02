@@ -5,7 +5,7 @@
     "containerSasToken": { "type": "securestring" }
     },
     "variables":{
-    "templateBaseUrl": "https://sctdeploymenttemplates.blob.core.windows.net/live/",
+    "templateBaseUrl": "https://sctdeploymenttemplates.blob.core.windows.net/live/"
     },
     "resources": [
     {
