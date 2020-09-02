@@ -12,7 +12,9 @@
     }
     },
     "variables":{
-    "templateBaseUrl": "https://sctdeploymenttemplates.blob.core.windows.net/live/"
+    "templateBaseUrl": "https://sctdeploymenttemplates.blob.core.windows.net/live/",
+    "templateName": "Azure-Patching-Template.json",
+    "templateUrl": "[uri(variables('templateBaseUrl'), variables('templatename'))] "
     },
     "resources": [
     {
@@ -22,7 +24,7 @@
       "properties": {
       "mode": "Incremental",
       "templateLink": {
-        "uri": "[uri(variables('templateBaseUrl'), 'Azure-Patching-Template.json', parameters('containerSasToken'))]",
+        "uri": "[concat(variables('templateUrl'), parameters('containerSasToken'))]",
         "contentVersion": "1.0.0.0"
       },
       "parameters": {
