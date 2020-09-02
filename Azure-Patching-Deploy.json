@@ -17,6 +17,9 @@
       "templateLink": {
         "uri": "[uri(variables('templateBaseUrl'), 'Azure-Patching-Template.json', parameters('containerSasToken'))]",
         "contentVersion": "1.0.0.0"
+      },
+      "parameters": {
+        "softcatDynamicsCode" :{"value": "[parameters('softcatDynamicsCode')]"}
       }
       }
     }
