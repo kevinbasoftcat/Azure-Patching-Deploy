@@ -14,7 +14,7 @@
     "variables":{
     "templateBaseUrl": "https://sctdeploymenttemplates.blob.core.windows.net/live/",
     "templateName": "Azure-Patching-Template.json",
-    "templateUrl": "[uri(variables('templateBaseUrl'), variables('templatename'))] "
+    "templateUrl": "[concat(variables('templateBaseUrl'), variables('templatename'))] "
     },
     "resources": [
     {
