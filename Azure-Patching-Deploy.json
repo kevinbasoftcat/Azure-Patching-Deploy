@@ -1,0 +1,26 @@
+{
+    "$schema": "https://schema.management.azure.com/schemas/2019-04-01/deploymentTemplate.json#",
+    "contentVersion": "1.0.0.0",
+    "parameters": {
+    "containerSasToken": { "type": "securestring" }
+    },
+    "variables":{
+    "templateBaseUrl": "https://sctdeploymenttemplates.blob.core.windows.net/live/"
+    },
+    "resources": [
+    {
+      "type": "Microsoft.Resources/deployments",
+      "apiVersion": "2019-10-01",
+      "name": "AzurePatchingTemplate",
+      "properties": {
+      "mode": "Incremental",
+      "templateLink": {
+        "uri": "[uri(variables('templateBaseUrl'), 'Azure-Patching-Template.json'), parameters('containerSasToken')]",
+        "contentVersion": "1.0.0.0"
+      }
+      }
+    }
+    ],
+    "outputs": {
+    }
+  }
