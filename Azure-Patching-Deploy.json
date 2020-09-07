@@ -1,37 +1,61 @@
 {
-    "$schema": "https://schema.management.azure.com/schemas/2019-04-01/deploymentTemplate.json#",
-    "contentVersion": "1.0.0.0",
-    "parameters": {
-    "containerSasToken": { "type": "securestring" },
-    "softcatDynamicsCode": {
-      "type": "string",
-      "maxLength": 6,
-      "metadata": {
-        "description": "Softcat customer dynamics code. Must be a valid 6 character code."
-      }
+  "$schema": "https://schema.management.azure.com/schemas/2018-05-01/subscriptionDeploymentTemplate.json#",
+  "contentVersion": "1.0.0.0",
+  "parameters": {
+  "containerSasToken": { "type": "securestring" },
+  "softcatDynamicsCode": {
+    "type": "string",
+    "maxLength": 6,
+    "metadata": {
+      "description": "Softcat customer dynamics code. Must be a valid 6 character code."
     }
-    },
-    "variables":{
-    "templateBaseUrl": "https://sctdeploymenttemplates.blob.core.windows.net/live/",
-    "patchingTemplateUrl": "[uri(variables('templateBaseUrl'), 'Azure-Patching-Template.json')]"
-    },
-    "resources": [
-    {
-      "type": "Microsoft.Resources/deployments",
-      "apiVersion": "2019-10-01",
-      "name": "AzurePatchingTemplate",
-      "properties": {
-      "mode": "Incremental",
-      "templateLink": {
-        "uri": "[concat(variables('patchingTemplateUrl'), parameters('containerSasToken'))]",
-        "contentVersion": "1.0.0.0"
-      },
-      "parameters": {
-        "softcatDynamicsCode" :{"value": "[parameters('softcatDynamicsCode')]"}
-      }
-      }
-    }
+  },
+  "resourceGroupLocation": {
+    "type": "string",
+  "defaultValue": "UK South",
+  "allowedValues": [
+    "UK South",
+    "UK West",
+    "West Europe"
+  ],
+  "metadata": {
+    "description": "Location for all resources."
+  }
+  }
+  },
+  "variables":{
+  "templateBaseUrl": "https://sctdeploymenttemplates.blob.core.windows.net/live/",
+  "patchingTemplateUrl": "[uri(variables('templateBaseUrl'), 'Azure-Patching-Template.json')]",
+  "resourceGroupName": "[concat(parameters('softcatDynamicsCode'), '-RG07-Patching')]"
+  },
+  "resources": [
+  {
+    "type": "Microsoft.Resources/resourceGroups",
+    "apiVersion": "2020-06-01",
+    "name": "[variables('resourceGroupName')]",
+    "location": "[parameters('resourceGroupLocation')]",
+    "properties": {}
+  },
+  {
+    "type": "Microsoft.Resources/deployments",
+    "apiVersion": "2019-10-01",
+    "name": "AzurePatchingTemplate",
+    "resourceGroup": "[variables('resourceGroupName')]",
+    "dependsOn": [
+      "[variables('resourceGroupName')]"
     ],
-    "outputs": {
+    "properties": {
+    "mode": "Incremental",
+    "templateLink": {
+      "uri": "[concat(variables('patchingTemplateUrl'), parameters('containerSasToken'))]",
+      "contentVersion": "1.0.0.0"
+    },
+    "parameters": {
+      "softcatDynamicsCode" :{"value": "[parameters('softcatDynamicsCode')]"}
+    }
     }
   }
+  ],
+  "outputs": {
+  }
+}
