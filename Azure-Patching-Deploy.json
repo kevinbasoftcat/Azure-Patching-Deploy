@@ -26,13 +26,13 @@
   "variables":{
   "templateBaseUrl": "https://sctdeploymenttemplates.blob.core.windows.net/live/",
   "patchingTemplateUrl": "[uri(variables('templateBaseUrl'), 'Azure-Patching-Template.json')]",
-  "resourceGroupName": "[concat(parameters('softcatDynamicsCode'), '-RG07-Patching')]"
+  "patchingResourceGroupName": "[concat(parameters('softcatDynamicsCode'), '-RG07-Patching')]"
   },
   "resources": [
   {
     "type": "Microsoft.Resources/resourceGroups",
     "apiVersion": "2020-06-01",
-    "name": "[variables('resourceGroupName')]",
+    "name": "[variables('patchingResourceGroupName')]",
     "location": "[parameters('resourceGroupLocation')]",
     "properties": {}
   },
@@ -40,9 +40,9 @@
     "type": "Microsoft.Resources/deployments",
     "apiVersion": "2019-10-01",
     "name": "AzurePatchingTemplate",
-    "resourceGroup": "[variables('resourceGroupName')]",
+    "resourceGroup": "[variables('patchingResourceGroupName')]",
     "dependsOn": [
-      "[variables('resourceGroupName')]"
+      "[variables('patchingResourceGroupName')]"
     ],
     "properties": {
     "mode": "Incremental",
