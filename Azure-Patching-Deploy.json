@@ -30,6 +30,7 @@
   },
   "resources": [
   {
+    "condition": "[not(resourceId('resourcegroups', variables('resourceGroupName')]",
     "type": "Microsoft.Resources/resourceGroups",
     "apiVersion": "2020-06-01",
     "name": "[variables('resourceGroupName')]",
