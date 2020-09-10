@@ -34,6 +34,9 @@
     "apiVersion": "2020-06-01",
     "name": "[variables('resourceGroupName')]",
     "location": "[parameters('resourceGroupLocation')]",
+    "tags": {
+      "SoftcatTemplate": "ManagedService"
+    },
     "properties": {}
   },
   {
