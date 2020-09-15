@@ -35,7 +35,7 @@
     "name": "[variables('resourceGroupName')]",
     "location": "[parameters('resourceGroupLocation')]",
     "tags": {
-      "SoftcatTemplate": "MAService"
+      "SoftcatTemplate": "PatchingService"
     },
     "properties": {}
   },
